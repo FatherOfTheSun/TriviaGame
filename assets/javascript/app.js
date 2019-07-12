@@ -1,68 +1,72 @@
+
+var number = 11;
+
+
 var myQuestions = [
     {
         question: "Which dogs were bred to kill Bulls for sport?",
 
         answers: {
-            a: 'German Shepard',
-            b: 'Pitbull',
-            c: 'Cane Corso',
-            d: 'Bulldog',
-            e: 'B and D'
+            a: 'German Shepard ',
+            b: 'Pitbull ',
+            c: 'Cane Corso ',
+            d: 'Bulldog ',
+            e: 'B and D '
         },
         correctAnswer: 'e'
     },
     {
         question: "Which dog were bred to hunt lions?",
         answers: {
-            a: 'Rhodesian Ridgeback',
-            b: 'German Shepard',
-            c: 'Austtalian Shepard',
-            d: 'Cane Corso',
-            e: 'None of the Above'
+            a: 'Rhodesian Ridgeback ',
+            b: 'German Shepard ',
+            c: 'Austtalian Shepard ',
+            d: 'Cane Corso ',
+            e: 'None of the Above '
         },
         correctAnswer: 'a'
     },
     {
         question: "Whick dog were bred to hunt Badger?",
         answers: {
-            a: 'Australian Shepard',
-            b: 'Husky',
-            c: 'Dachshud',
-            d: 'Chihuahua',
-            e: 'Dalmatian'
+            a: 'Australian Shepard ',
+            b: 'Husky ',
+            c: 'Dachshud ',
+            d: 'Chihuahua ',
+            e: 'Dalmatian '
         },
         correctAnswer: 'c'
     },
     {
         question: "Which dogs were bred for hearding livestock such as sheep?",
         answers: {
-            a: 'German Shepard',
-            b: 'Australian Shepard',
-            c: 'Boarder Collies',
-            d: 'Corgi',
-            e: 'All of the Above'
+            a: 'German Shepard ',
+            b: 'Australian Shepard ',
+            c: 'Boarder Collies ',
+            d: 'Corgi ',
+            e: 'All of the Above '
         },
         correctAnswer: 'e'
     },
     {
         question: "Which dog were bred for mountain rescue?",
         answers: {
-            a: 'St. Bernard',
-            b: 'Husky',
-            c: 'German Shepard',
-            d: 'Alaskan Malamute',
-            e: 'Rhodesian Ridgeback'
+            a: 'St. Bernard ',
+            b: 'Husky ',
+            c: 'German Shepard ',
+            d: 'Alaskan Malamute ',
+            e: 'Rhodesian Ridgeback '
         },
         correctAnswer: 'a'
     },
     {
         question: "Which dogs were bred for bear hunting?",
         answers: {
-            a: 'Caucasian Shepard Dog',
-            b: 'Karelian Bear Dog',
-            c: 'Tibetan Mastiff',
-            d: 'Kangal Shepard Dog',
-            e: 'All of the Above'
+            a: 'Caucasian Shepard Dog ',
+            b: 'Karelian Bear Dog ',
+            c: 'Tibetan Mastiff ',
+            d: 'Kangal Shepard Dog ',
+            e: 'All of the Above '
         },
         correctAnswer: 'e'
     }
@@ -86,27 +90,26 @@ function generateQuiz(questions, quizContainer, resultsContainer, submitButton) 
             // first reset the list of answers
             answers = [];
 
-            // for each available answer...
+            // each available answer...
             for (letter in questions[i].answers) {
 
-                // ...add an html radio button
+                // answers
                 answers.push(
                     '<label>'
                     + '<input type="radio" name="question' + i + '" value="' + letter + '">'
-                    + letter + ': '
                     + questions[i].answers[letter]
                     + '</label>'
                 );
             }
 
-            // add this question and its answers to the output
+            // questions
             output.push(
                 '<div class="question">' + questions[i].question + '</div>'
                 + '<div class="answers">' + answers.join('') + '</div>'
             );
         }
 
-        // finally combine our output list into one string of html and put it on the page
+        //string
         quizContainer.innerHTML = output.join('');
     }
 
@@ -132,7 +135,7 @@ function generateQuiz(questions, quizContainer, resultsContainer, submitButton) 
                 numCorrect++;
 
                 // color the answers green
-                answerContainers[i].style.color = 'lightgreen';
+                answerContainers[i].style.color = 'green';
             }
             // if answer is wrong or blank
             else {
@@ -143,6 +146,8 @@ function generateQuiz(questions, quizContainer, resultsContainer, submitButton) 
 
         // show number of correct answers out of total
         resultsContainer.innerHTML = numCorrect + ' out of ' + questions.length;
+
+        //var results = resultsContainer
     }
 
     // show questions right away
@@ -151,6 +156,83 @@ function generateQuiz(questions, quizContainer, resultsContainer, submitButton) 
     // on submit, show results
     submitButton.onclick = function () {
         showResults(questions, quizContainer, resultsContainer);
+
+        clearInterval(intervalId);
+
+
+
+
+
+
+
+
     }
+
+
+
+
+
+
+
+
+    $("#start").on("click", run);
+    $("#stop").on("click", stop);
+
+    function run() {
+
+
+        number = 11;
+
+
+
+        intervalId = setInterval(decrement, 1000);
+
+
+    }
+
+    function decrement() {
+
+        number--;
+
+        $("#show-number").html("<h2>" + number + "</h2>");
+
+        if (number <= 0) {
+
+
+
+            showResults(questions, quizContainer, resultsContainer);
+
+            clearInterval(intervalId);
+
+
+
+
+
+
+
+
+
+        }
+
+    }
+
+    function stop() {
+
+        generateQuiz(myQuestions, quizContainer, resultsContainer, submitButton);
+
+        run();
+
+
+
+
+
+    }
+
+
+
+
+
+
+
 
 }
